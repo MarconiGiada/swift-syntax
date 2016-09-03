@@ -1,3 +1,4 @@
+
 <img src="https://s3-us-west-1.amazonaws.com/udacity-content/degrees/catalog-images/nd003.png" alt="iOS Developer Nanodegree logo" height="70" >
 
 # Swift Syntax
@@ -17,3 +18,6 @@ Generally speaking, most projects can run without any additional setup. However,
 ## Maintainers
 
 @GabrielleM
+=======
+# swift-syntax
+A series of exercises to practice Swift syntax taken from Udacity's course.
