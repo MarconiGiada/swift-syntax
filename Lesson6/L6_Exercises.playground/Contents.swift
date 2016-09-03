@@ -13,10 +13,16 @@ struct Tail {
 class Animal {
     var species: String = ""
     let tail: Tail
+    
+    init (species : String, tailLength : Double) {
+        self.species = species
+        self.tail = Tail.init(lengthInCm: tailLength)
+    }
 }
 //: __1b.__
 //: Instantiate and initialize a few different Animals.
-
+let animal = Animal.init(species: "Lion", tailLength: 25)
+print(animal)
 //: __Problem 2__
 //:
 //: Below are the beginnings of the Peach class.
