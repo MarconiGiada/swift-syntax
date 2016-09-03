@@ -31,10 +31,22 @@ class Peach {
     
     // Softness is rated on a scale from 1 to 5, with 5 being the softest
     var softness: Int
+    static let varieties = ["Peach 1", "Peach 2"]
     
     init(variety: String, softness: Int) {
         self.variety = variety
         self.softness = softness
+    }
+    
+    func ripen () -> String {
+        if self.softness < 5 {
+            self.softness += 1
+        }
+        if self.softness == 5 {
+            return "This peach is as ripe as it can be!"
+        } else {
+            return "This peach is still not ripe"
+        }
     }
 }
 //: __2a.__
@@ -45,17 +57,23 @@ class Peach {
 //:
 //: __2c.__
 //: Create an instance of the Peach class and call the method ripen().
-
+let peach = Peach.init(variety: "Some", softness: 4)
+print(peach.ripen())
 //: __Problem 3__
 //:
 //: __3a.__
 //:Add the computed property, "cuddlability", to the class, FluffyDog. Cuddlability should be computed based on the values of the stored properties, fluffiness and droolFactor.
-var theFluffiestDog = UIImage(named:"fluffyDog")!
+//var theFluffiestDog = UIImage(named:"fluffyDog")!
 class FluffyDog {
     let name: String
     let fluffiness: Int
     let droolFactor: Int
-    
+    var cuddlability : Float {
+        get {
+            let value = Float(fluffiness) / Float(droolFactor)
+            return value
+        }
+    }
     init(name: String, fluffiness: Int, droolFactor: Int) {
         self.name = name
         self.fluffiness = fluffiness
@@ -68,7 +86,9 @@ class FluffyDog {
 }
 //: __3b.__
 //: Instantiate and initialize an instance of the class, FluffyDog. Use it to call the method, chase().
-
+let doggy = FluffyDog.init(name: "Pluto", fluffiness: 10, droolFactor: 3)
+print(doggy.cuddlability)
+print(doggy.chase("Toyota"))
 //: __Problem 4__
 //:
 //: __4a.__
@@ -89,13 +109,34 @@ class ChattyDog {
         self.breed = breed
         self.size = size
     }
+    
+    func bark() -> String {
+        if self.size == .Small {
+            return "woof!"
+        } else if self.size == .Medium {
+            return "woof woof!"
+        } else {
+            return "WOOF WOOF!"
+        }
+    }
+    
+    class func speak (size: Size) -> String {
+        if size == .Small {
+            return "woof!"
+        } else if size == .Medium {
+            return "woof woof!"
+        } else {
+            return "WOOF WOOF!"
+        }
+    }
 }
 //: __4b.__
 //: Create an instance of ChattyDog and use it to call the method, bark().
-
+let doggydog = ChattyDog.init(name: "Triunfo", breed: "Golden", size: .Medium)
+print(doggydog.bark())
 //: __4c.__
 //: Rewrite the method, bark(), as a type method and rename it speak(). Call your type method to test it out.
-
+print(ChattyDog.speak(.Large))
 //: __Problem 5__
 //:
 //:__5a.__
@@ -113,7 +154,21 @@ enum NaturalDisaster {
 class House {
     var numberOfBedrooms: Int = 0
     let location: Quality
+    
+    init (location : Quality) {
+        self.location = location
+    }
  
+    var worthyOfAnOffer : Bool {
+        get {
+            if (self.location == .Good || self.location == .Excellent) && numberOfBedrooms > 2 {
+                return true
+            } else {
+                return false
+            }
+        }
+    }
+    
     func willStayStanding(naturalDisaster:NaturalDisaster)-> Bool {
         switch naturalDisaster {
         case .Earthquake:
@@ -128,7 +183,8 @@ class House {
 
 //: __5b.__
 //: Create an instance of the House class and use it to call the method, willStayStanding().  This method takes in a parameter of type NaturalDisaster and return a Bool indicating whether the house will stay standing in a given natural disaster.
-
+let house = House.init(location: .Good)
+print(house.worthyOfAnOffer)
 //: __5c.__
 //: Add a computed property called, "worthyOfAnOffer". This property should be a Bool, whose return value is dependent upon some combination of the stored properties, numberOfBedrooms and location.
 
