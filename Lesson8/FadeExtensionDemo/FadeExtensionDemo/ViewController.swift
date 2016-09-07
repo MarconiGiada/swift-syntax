@@ -20,9 +20,7 @@ class ViewController: UIViewController {
     
     @IBAction func sunRiseAndSet(sender: AnyObject) {
         // Fade out
-        UIView.animateWithDuration(1.0, delay: 0.0, options: UIViewAnimationOptions.CurveEaseIn, animations: {
-            self.imageView.alpha = 0.0
-            }, completion: {
+        imageView.fadeOut(1.0, delay: 0.0, completion: {
                 (finished: Bool) -> Void in
                 
                 //Once the label is completely invisible, set the text and fade it back in
@@ -33,9 +31,7 @@ class ViewController: UIViewController {
                 }
                 
                 // Fade in
-                UIView.animateWithDuration(1.0, delay:0.0, options:UIViewAnimationOptions.CurveEaseIn, animations: {
-                    self.imageView.alpha = 1.0
-                    }, completion: nil)
+                self.imageView.fadeIn(1.0, delay: 0.0, completion: nil)
         })
     }
 }

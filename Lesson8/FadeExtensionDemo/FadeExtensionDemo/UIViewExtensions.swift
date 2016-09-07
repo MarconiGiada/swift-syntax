@@ -12,5 +12,17 @@ import UIKit
 // MARK: - UIView (Extensions)
 
 extension UIView {
+    func fadeOut(duration: NSTimeInterval, delay: NSTimeInterval, completion: ((finished: Bool) -> Void)?) {
+        UIView.animateWithDuration(duration, delay: delay, options: UIViewAnimationOptions.CurveEaseIn, animations: {
+            self.alpha = 0.0
+        }, completion: completion)
+    }
+    
+    func fadeIn (duration: NSTimeInterval, delay: NSTimeInterval, completion: ((finished: Bool) -> Void)?) {
+        UIView.animateWithDuration(duration, delay: delay, options: UIViewAnimationOptions.CurveEaseIn, animations: {
+            self.alpha = 1.0
+            }, completion: nil)
+
+    }
 
 }
