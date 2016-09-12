@@ -11,14 +11,14 @@ import UIKit
 //:Rewrite the sorting closure expression to be as concise as possible.
 // 1
 var surnames = ["Silverman", "Fey", "Whig", "Schumer", "Kaling"]
-let orderedSurnames = surnames.sort({(name1: String, name2: String) -> Bool in
-    return name2 > name1
+let orderedSurnames = surnames.sort({
+    $1 > $0
 })
 
 // 2
 let battingAverages = [0.302, 0.556, 0.280, 0.500, 0.281, 0.285]
-let sortedAverages = battingAverages.sort({(average1: Double, average2: Double) -> Bool in
-    return average2 > average1
+let sortedAverages = battingAverages.sort({
+    $1 > $0
 })
 
 //: __Problem 3__
@@ -33,13 +33,24 @@ let divisibleByThree = numbers.filter({(number: Int) -> Bool in
 //:Filter the following array for the numbers which are divisible by 12.
 let numbersAsStrings = ["685", "1728", "648", "87", "979", "59175432"]
 
+let divisibleByTwelve = numbersAsStrings.filter({(number: String) -> Bool in
+    return Int(number)! % 12 == 0
+})
+print(divisibleByTwelve)
 //: __3b.__
 //: Rewrite the filtering closure expression to be as concise as possible.
-
+let divisibleByTwelveConcise = numbersAsStrings.filter({
+    Int($0)! % 12 == 0
+})
+print(divisibleByTwelveConcise)
 //: __Problem 4__
 //:
 //: Filtering out particles greater that 20 microns has been shown to reduce exposure to waterborne pathogens. Filter the following array for all of the particles below 20 microns in size. Assign the result to a new array.
 let particleSizesInMicrons = [150, 16, 82, 30, 10, 57]
+let newArray = particleSizesInMicrons.filter({
+    $0 < 20
+})
+print(newArray)
 
 //: __Problem 5__
 //:
@@ -52,7 +63,11 @@ let sizesAsStrings = particleSizesInMicrons.map({ (size: Int) -> String in
 //: Ben just got back from India and he is tallying what he spent on gifts for his customs form.
 //: Use the map() method to transform this array of prices into dollars. Round to the nearest dollar.
 let pricesInRupees = [750, 825, 2000, 725]
+let pricesInDollars = pricesInRupees.map({
+    round(Float($0) * 0.0149)
+})
 
+print(pricesInDollars)
 //: __Problem 6__
 //:
 //: Katie has a competition going with her old friends from the track team. Each person tries to match her fastest high school time for the 1600m run + 1 second for every year since graduation.
@@ -73,3 +88,11 @@ func timeStringFromInterval(timeInterval: Int) -> NSString {
 }
 
 var oldTimes = ["5:18", "5:45", "5:56", "5:25", "5:27"]
+
+let goalTimes = oldTimes.map({(time: String) -> String in
+    let interval = timeIntervalFromString(time)
+    let newTime = interval + 13
+    return timeStringFromInterval(newTime) as String
+})
+
+print(goalTimes)
